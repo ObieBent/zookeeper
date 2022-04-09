@@ -1,0 +1,28 @@
+---
+
+- name: RedHat | Add Confluent repository GPG key
+  rpm_key:
+    state: present
+    key:   http://packages.confluent.io/rpm/2.0/archive.key
+
+- name: RedHat | Add repository
+  tags: config
+  template:
+    src:   etc/yum.repos.d/confluent.repo.j2
+    dest:  /etc/yum.repos.d/confluent.repo
+    mode:  0644
+    owner: root
+    group: root
+
+- name: RedHat | Setting firewall rules
+  firewalld:
+    port:      "{{ item }}/tcp"
+    state:     enabled
+    permanent: true
+    immediate: yes
+  with_items:
+    - "{{ zk_admin_port }}"
+    - "{{ zk_client_port }}"
+    - "{{ zk_follower_port }}"
+    - "{{ zk_election_port }}"
+  when: firewall_setup == true
