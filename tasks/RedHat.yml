@@ -21,6 +21,7 @@
     permanent: true
     immediate: yes
   with_items:
+    - "{{ zk_admin_port }}"
     - "{{ zk_client_port }}"
     - "{{ zk_follower_port }}"
     - "{{ zk_election_port }}"

@@ -10,6 +10,7 @@ confluent_pkg_version: 5.4
 zk_client_port: 2181
 zk_follower_port: 2888
 zk_election_port: 3888
+zk_admin_port: 8080
 zk_max_client_connexions: 0
 zk_autopurge_snapRetainCount: 3
 zk_autopurge_purgeInterval: 24
